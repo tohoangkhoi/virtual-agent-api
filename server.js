@@ -4,7 +4,7 @@ const cors = require("cors");
 
 app.use(express.json());
 app.use(cors());
-
+const port = process.env.PORT || 8080;
 const db = require("./models");
 
 //Routers
@@ -15,7 +15,7 @@ app.use("/agents", agentRouter);
 
 db.sequelize.sync().then(() => {
   //Start the server after go through all the models
-  app.listen(3001, () => {
-    console.log("Server running on port 3001");
+  app.listen(port, () => {
+    console.log("Server running on port 3001", port);
   });
 });
