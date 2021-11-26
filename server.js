@@ -10,8 +10,10 @@ const db = require("./models");
 //Routers
 const userRouter = require("./routes/UsersRoutes");
 const agentRouter = require("./routes/AgentRoutes");
+const bookingRouter = require("./routes/BookingRoutes.js");
 app.use("/users", userRouter);
 app.use("/agents", agentRouter);
+app.use("/bookings", bookingRouter);
 
 db.sequelize.sync().then(() => {
   //Start the server after go through all the models
