@@ -185,7 +185,9 @@ exports.verify_email = async (req, res) => {
 
   await axios
     .post("https://api.chatengine.io/users/", chatPayload, {
-      "PRIVATE-KEY": CHAT_ENGINE_PROJECT_SECRET,
+      headers: {
+        "PRIVATE-KEY": CHAT_ENGINE_PROJECT_SECRET,
+      },
     })
     .then((data) => {
       console.log("chatEngine", data);
