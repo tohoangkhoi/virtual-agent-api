@@ -4,7 +4,13 @@ const bcrypt = require("bcrypt");
 const nodemailer = require("nodemailer");
 const { sign } = require("jsonwebtoken");
 const { validationResult } = require("express-validator");
-const { USERNAME, PASSWORD, SECRET } = require("../app.properties");
+const {
+  USERNAME,
+  PASSWORD,
+  SECRET,
+  CHAT_ENGINE_PROJECT_SECRET,
+} = require("../app.properties");
+const axios = require("axios");
 
 exports.register = async (req, res) => {
   const {
@@ -154,6 +160,7 @@ exports.googleLogin = async (req, res) => {
     email: email,
     id: registeredUser.id,
   };
+
   const accessToken = sign(payload, SECRET, {
     expiresIn: "1h",
   });
@@ -167,12 +174,27 @@ exports.verify_email = async (req, res) => {
     res.json("User does not exist");
   }
 
+  //Add User to ChatEngine
+  const chatPayload = {
+    username: user.email,
+    first_name: user.first_name,
+    last_name: user.last_name,
+    secret: user.email,
+  };
+  const { id } = await axios
+    .post("https://api.chatengine.io/users/", payload, {
+      "PRIVATE-KEY": CHAT_ENGINE_PROJECT_SECRET,
+    })
+    .catch((err) => {
+      res.status(500).json(err);
+    });
+
   await Users.update(
-    { is_verified: true },
+    { is_verified: true, chat_id: id },
     { where: { email: req.params.id } }
   );
 
-  res.json("Sucessfully");
+  res.json(id);
 };
 
 const send_activation_link = (to) => {
