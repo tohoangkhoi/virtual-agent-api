@@ -85,7 +85,7 @@ exports.login = async (req, res) => {
   const { email, password } = req.body;
 
   const user = await Users.findOne({ where: { email: email } }).catch((err) => {
-    res.status(400).send("there is something wrong");
+    res.status(400).send(err);
   });
 
   if (!user) {
