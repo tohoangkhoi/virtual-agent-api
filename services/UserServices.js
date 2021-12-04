@@ -1,18 +1,11 @@
 const { Users } = require("../models");
 const bcrypt = require("bcrypt");
-const { connect } = require("getstream");
+
 const nodemailer = require("nodemailer");
 const { sign } = require("jsonwebtoken");
 const { validationResult } = require("express-validator");
-const {
-  USERNAME,
-  PASSWORD,
-  SECRET,
-  STREAM_API_KEY,
-  STREAM_SECRET_KEY,
-  STREAM_APP_ID,
-} = require("../app.properties");
-const StreamChat = require("stream-chat").StreamChat;
+const { USERNAME, PASSWORD, SECRET } = require("../app.properties");
+
 exports.register = async (req, res) => {
   const {
     email,
@@ -57,19 +50,10 @@ exports.register = async (req, res) => {
     })
       .then(() => {
         send_activation_link(email);
-        //GetStream Logic
-        //Connect with GetSTream
-        try {
-          const serverClient = connect(
-            STREAM_API_KEY,
-            STREAM_SECRET_KEY,
-            STREAM_APP_ID
-          );
-          const streamToken = serverClient.createUserToken(email);
-          send_activation_link(email);
-          res.status(200).json({ streamToken: streamToken });
 
-          return streamToken;
+        try {
+          send_activation_link(email);
+          res.status(200).json("Success");
         } catch (err) {
           console.log(err);
           res.status(500).json({ message: err });
@@ -122,11 +106,8 @@ exports.login = async (req, res) => {
       expiresIn: "1h",
     });
 
-    const streamToken = return_stream_token(email);
-    console.log("streamToken", streamToken);
     res.status(200).json({
       accessToken: accessToken,
-      streamToken: streamToken,
     });
   });
 };
@@ -147,10 +128,7 @@ exports.googleLogin = async (req, res) => {
       expiresIn: "1h",
     });
 
-    const streamToken = return_stream_token(email);
-    res
-      .status(200)
-      .json({ accessToken: accessToken, streamToken: streamToken });
+    res.status(200).json({ accessToken: accessToken });
   }
 
   //Create token
@@ -220,25 +198,4 @@ const send_activation_link = (to) => {
       console.log("Email sent !!!");
     }
   });
-};
-
-const return_stream_token = async (email) => {
-  try {
-    const serverClient = connect(
-      STREAM_API_KEY,
-      STREAM_SECRET_KEY,
-      STREAM_APP_ID
-    );
-    const client = StreamChat.getInstance(
-      STREAM_API_KEY,
-      STREAM_SECRET_KEY,
-      STREAM_APP_ID
-    );
-
-    const streamToken = serverClient.createUserToken(email);
-    return streamToken;
-  } catch (err) {
-    console.log(err);
-    res.status(500).json({ message: err });
-  }
 };
