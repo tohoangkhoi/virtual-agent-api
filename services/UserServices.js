@@ -182,23 +182,21 @@ exports.verify_email = async (req, res) => {
     secret: user.email,
   };
 
-  await axios
-    .post("https://api.chatengine.io/users/", payload, {
+  const { id } = await axios
+    .post("https://api.chatengine.io/users/", chatPayload, {
       "PRIVATE-KEY": CHAT_ENGINE_PROJECT_SECRET,
     })
-    .then((data) => {
-      res.json(data);
-    })
+
     .catch((err) => {
       res.status(500).json(err);
     });
 
-  await Users.update(
+  const responseUser = await Users.update(
     { is_verified: true, chat_id: id },
     { where: { email: req.params.id } }
   );
 
-  res.json(id);
+  res.json({ responseUser });
 };
 
 const send_activation_link = (to) => {
