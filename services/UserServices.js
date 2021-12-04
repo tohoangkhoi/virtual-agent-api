@@ -12,7 +12,7 @@ const {
   STREAM_SECRET_KEY,
   STREAM_APP_ID,
 } = require("../app.properties");
-const StreamChat = require("stream-chat");
+const StreamChat = require("stream-chat").StreamChat;
 exports.register = async (req, res) => {
   const {
     email,
@@ -136,7 +136,7 @@ exports.googleLogin = async (req, res) => {
     const streamToken = return_stream_token(email);
     res
       .status(200)
-      .json({ accessToken: accessToken, streamToken: streamToken });
+      .json({ accessToken: accessToken, streamToken: streamToken.toString() });
   }
 
   //Create token
@@ -210,11 +210,16 @@ const send_activation_link = (to) => {
 
 const return_stream_token = async (email) => {
   try {
-    const client = StreamChat.getInstance(
+    const serverClient = connect(
       STREAM_API_KEY,
       STREAM_SECRET_KEY,
       STREAM_APP_ID
     );
+    // const client = StreamChat.getInstance(
+    //   STREAM_API_KEY,
+    //   STREAM_SECRET_KEY,
+    //   STREAM_APP_ID
+    // );
 
     const streamToken = serverClient.createUserToken(email);
     return streamToken;
