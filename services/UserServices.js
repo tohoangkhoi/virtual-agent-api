@@ -180,7 +180,6 @@ exports.verify_email = async (req, res) => {
     first_name: "Adam",
     last_name: "La Morre",
     secret: "pass1234",
-    custom_json: { high_score: 2000 },
   };
 
   await axios
@@ -190,7 +189,7 @@ exports.verify_email = async (req, res) => {
       },
     })
     .then((response) => {
-      console.log("chatEngine", response);
+      console.log("chatEngine", "OKAY");
     })
     .catch((err) => {
       console.log(err);
