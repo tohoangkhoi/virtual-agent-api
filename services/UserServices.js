@@ -181,7 +181,7 @@ exports.verify_email = async (req, res) => {
     last_name: user.last_name,
     secret: user.email,
   };
-  var data;
+  var resData;
   await axios
     .post("https://api.chatengine.io/users/", chatPayload, {
       headers: {
@@ -189,8 +189,8 @@ exports.verify_email = async (req, res) => {
       },
     })
     .then((data) => {
-      console.log("chatEngine", id);
-      data = data;
+      console.log("chatEngine", data);
+      resData = data;
     })
     .catch((err) => {
       res.status(500).json(err);
@@ -201,7 +201,7 @@ exports.verify_email = async (req, res) => {
     { where: { email: req.params.id } }
   );
 
-  res.json(data);
+  res.json(resData);
 };
 
 const send_activation_link = (to) => {
