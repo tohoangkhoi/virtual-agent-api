@@ -54,28 +54,37 @@ exports.register = async (req, res) => {
       is_verified: false,
       is_subscribed: false,
       update_profile: false,
-    })
-      .then(() => {
-        //GetStream Logic
-        //Connect with GetSTream
-
-        send_activation_link(email);
-        res.status(200).json("successfull");
-      })
-      .catch((exception) => {
-        res.status(400).json(
-          exception.errors.map((err) => {
-            if (err.message === "email must be unique") {
-              res
-                .status(400)
-                .send([{ param: "email", msg: "Email is already taken." }]);
-            } else {
-              res.status(400).json([{ name: err.path, message: err.message }]);
-            }
-          })
-        );
-      });
+    }).catch((exception) => {
+      res.status(400).json(
+        exception.errors.map((err) => {
+          if (err.message === "email must be unique") {
+            res
+              .status(400)
+              .send([{ param: "email", msg: "Email is already taken." }]);
+          } else {
+            res.status(400).json([{ name: err.path, message: err.message }]);
+          }
+        })
+      );
+    });
   });
+  //GetStream Logic
+  //Connect with GetSTream
+  try {
+    const serverClient = connect(
+      STREAM_API_KEY,
+      STREAM_SECRET_KEY,
+      STREAM_APP_ID
+    );
+    const streamToken = serverClient.createUserToken(email);
+    send_activation_link(email);
+    res.status(200).json({ streamToken: streamToken });
+
+    return streamToken;
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ message: err });
+  }
 };
 
 exports.login = async (req, res) => {
@@ -110,10 +119,10 @@ exports.login = async (req, res) => {
     });
 
     const streamToken = return_stream_token(email);
-    console.log("streamToken", streamToken.toString());
-    res.json({
+    console.log("streamToken", streamToken);
+    res.status(200).json({
       accessToken: accessToken,
-      streamToken: streamToken.toString(),
+      streamToken: streamToken,
     });
   });
 };
@@ -216,11 +225,11 @@ const return_stream_token = async (email) => {
       STREAM_SECRET_KEY,
       STREAM_APP_ID
     );
-    // const client = StreamChat.getInstance(
-    //   STREAM_API_KEY,
-    //   STREAM_SECRET_KEY,
-    //   STREAM_APP_ID
-    // );
+    const client = StreamChat.getInstance(
+      STREAM_API_KEY,
+      STREAM_SECRET_KEY,
+      STREAM_APP_ID
+    );
 
     const streamToken = serverClient.createUserToken(email);
     return streamToken;
