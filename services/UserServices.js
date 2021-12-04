@@ -1,10 +1,18 @@
 const { Users } = require("../models");
 const bcrypt = require("bcrypt");
+const connect = require("getstream");
 const nodemailer = require("nodemailer");
 const { sign } = require("jsonwebtoken");
 const { validationResult } = require("express-validator");
-const { USERNAME, PASSWORD, SECRET } = require("../app.properties");
-
+const {
+  USERNAME,
+  PASSWORD,
+  SECRET,
+  STREAM_API_KEY,
+  STREAM_SECRET_KEY,
+  STREAM_APP_ID,
+} = require("../app.properties");
+const StreamChat = require("stream-chat");
 exports.register = async (req, res) => {
   const {
     email,
@@ -48,9 +56,11 @@ exports.register = async (req, res) => {
       update_profile: false,
     })
       .then(() => {
-        res.json("Success");
+        //GetStream Logic
+        //Connect with GetSTream
 
         send_activation_link(email);
+        res.status(200).json("successfull");
       })
       .catch((exception) => {
         res.status(400).json(
@@ -98,7 +108,12 @@ exports.login = async (req, res) => {
     const accessToken = sign(payload, SECRET, {
       expiresIn: "1h",
     });
-    res.json(accessToken);
+
+    const streamToken = return_stream_token(email);
+    res.json({
+      accessToken: accessToken,
+      streamToken: streamToken,
+    });
   });
 };
 
@@ -118,7 +133,10 @@ exports.googleLogin = async (req, res) => {
       expiresIn: "1h",
     });
 
-    res.status(200).json(accessToken);
+    const streamToken = return_stream_token(email);
+    res
+      .status(200)
+      .json({ accessToken: accessToken, streamToken: streamToken });
   }
 
   //Create token
@@ -188,4 +206,20 @@ const send_activation_link = (to) => {
       console.log("Email sent !!!");
     }
   });
+};
+
+const return_stream_token = async (email) => {
+  try {
+    const client = StreamChat.getInstance(
+      STREAM_API_KEY,
+      STREAM_SECRET_KEY,
+      STREAM_APP_ID
+    );
+
+    const streamToken = serverClient.createUserToken(email);
+    return streamToken;
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ message: err });
+  }
 };

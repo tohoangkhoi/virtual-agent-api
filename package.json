@@ -5,7 +5,6 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-   
     "start": "NODE_ENV=production&&node server.js"
   },
   "author": "",
@@ -15,11 +14,13 @@
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "express-validator": "^6.13.0",
+    "getstream": "^7.3.1",
     "jsonwebtoken": "^8.5.1",
     "mysql2": "^2.3.3-rc.0",
     "nodemailer": "^6.7.0",
     "nodemon": "^2.0.15",
     "sequelize": "^6.9.0",
-    "sequelize-cli": "^6.3.0"
+    "sequelize-cli": "^6.3.0",
+    "stream-chat": "^4.4.3"
   }
 }
