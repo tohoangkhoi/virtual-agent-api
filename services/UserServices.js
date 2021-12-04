@@ -180,13 +180,12 @@ exports.verify_email = async (req, res) => {
     first_name: "Adam",
     last_name: "La Morre",
     secret: "pass1234",
-    custom_json: { high_score: 2000 },
   };
 
   await axios
     .post("https://api.chatengine.io/users/", chatPayload, {
       headers: {
-        "PRIVATE-KEY": CHAT_ENGINE_PROJECT_SECRET,
+        "private-key": CHAT_ENGINE_PROJECT_SECRET,
       },
     })
     .then((data) => {
