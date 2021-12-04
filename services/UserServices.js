@@ -191,7 +191,6 @@ exports.verify_email = async (req, res) => {
     })
     .then((data) => {
       console.log("chatEngine", data);
-      resData = data;
     })
     .catch((err) => {
       console.log(err);
@@ -203,7 +202,7 @@ exports.verify_email = async (req, res) => {
     { where: { email: req.params.id } }
   );
 
-  res.json({ resData });
+  res.json({ responseUser });
 };
 
 const send_activation_link = (to) => {
