@@ -176,10 +176,11 @@ exports.verify_email = async (req, res) => {
 
   //Add User to ChatEngine
   const chatPayload = {
-    username: `${user.email}`,
-    first_name: `${user.first_name}`,
-    last_name: `${user.last_name}`,
-    secret: `${user.email}`,
+    username: "adam_la_morre",
+    first_name: "Adam",
+    last_name: "La Morre",
+    secret: "pass1234",
+    custom_json: { high_score: 2000 },
   };
   var resData;
   await axios
