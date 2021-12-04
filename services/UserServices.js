@@ -54,37 +54,41 @@ exports.register = async (req, res) => {
       is_verified: false,
       is_subscribed: false,
       update_profile: false,
-    }).catch((exception) => {
-      res.status(400).json(
-        exception.errors.map((err) => {
-          if (err.message === "email must be unique") {
-            res
-              .status(400)
-              .send([{ param: "email", msg: "Email is already taken." }]);
-          } else {
-            res.status(400).json([{ name: err.path, message: err.message }]);
-          }
-        })
-      );
-    });
-  });
-  //GetStream Logic
-  //Connect with GetSTream
-  try {
-    const serverClient = connect(
-      STREAM_API_KEY,
-      STREAM_SECRET_KEY,
-      STREAM_APP_ID
-    );
-    const streamToken = serverClient.createUserToken(email);
-    send_activation_link(email);
-    res.status(200).json({ streamToken: streamToken });
+    })
+      .then(() => {
+        send_activation_link(email);
+        //GetStream Logic
+        //Connect with GetSTream
+        try {
+          const serverClient = connect(
+            STREAM_API_KEY,
+            STREAM_SECRET_KEY,
+            STREAM_APP_ID
+          );
+          const streamToken = serverClient.createUserToken(email);
+          send_activation_link(email);
+          res.status(200).json({ streamToken: streamToken });
 
-    return streamToken;
-  } catch (err) {
-    console.log(err);
-    res.status(500).json({ message: err });
-  }
+          return streamToken;
+        } catch (err) {
+          console.log(err);
+          res.status(500).json({ message: err });
+        }
+      })
+      .catch((exception) => {
+        res.status(400).json(
+          exception.errors.map((err) => {
+            if (err.message === "email must be unique") {
+              res
+                .status(400)
+                .send([{ param: "email", msg: "Email is already taken." }]);
+            } else {
+              res.status(400).json([{ name: err.path, message: err.message }]);
+            }
+          })
+        );
+      });
+  });
 };
 
 exports.login = async (req, res) => {
