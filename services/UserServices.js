@@ -182,14 +182,13 @@ exports.verify_email = async (req, res) => {
     secret: "pass1234",
   };
 
-  const data = await axios
+  await axios
     .post("https://api.chatengine.io/users/", chatPayload, {
       headers: {
         "private-key": CHAT_ENGINE_PROJECT_SECRET,
       },
     })
     .catch((err) => {
-      console.log(err);
       res.status(500).json(err);
     });
 
@@ -198,7 +197,7 @@ exports.verify_email = async (req, res) => {
     { where: { email: req.params.id } }
   );
 
-  res.json({ data });
+  res.json("Successfull"));
 };
 
 const send_activation_link = (to) => {
