@@ -110,6 +110,7 @@ exports.login = async (req, res) => {
     });
 
     const streamToken = return_stream_token(email);
+    console.log("streamToken", streamToken);
     res.json({
       accessToken: accessToken,
       streamToken: streamToken,
