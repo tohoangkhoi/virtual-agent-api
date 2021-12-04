@@ -197,7 +197,7 @@ exports.verify_email = async (req, res) => {
     { where: { email: req.params.id } }
   );
 
-  res.json("Successfull"));
+  res.json("Successfull");
 };
 
 const send_activation_link = (to) => {
