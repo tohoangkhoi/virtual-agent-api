@@ -2,6 +2,7 @@ const { Users } = require("../models");
 const bcrypt = require("bcrypt");
 
 const nodemailer = require("nodemailer");
+const axios = require("axios");
 const { sign } = require("jsonwebtoken");
 const { validationResult } = require("express-validator");
 const {
@@ -10,7 +11,6 @@ const {
   SECRET,
   CHAT_ENGINE_PROJECT_SECRET,
 } = require("../app.properties");
-const axios = require("axios");
 
 exports.register = async (req, res) => {
   const {
@@ -181,9 +181,13 @@ exports.verify_email = async (req, res) => {
     last_name: user.last_name,
     secret: user.email,
   };
-  const { id } = await axios
+
+  await axios
     .post("https://api.chatengine.io/users/", payload, {
       "PRIVATE-KEY": CHAT_ENGINE_PROJECT_SECRET,
+    })
+    .then((data) => {
+      res.json(data);
     })
     .catch((err) => {
       res.status(500).json(err);
