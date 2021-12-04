@@ -110,10 +110,10 @@ exports.login = async (req, res) => {
     });
 
     const streamToken = return_stream_token(email);
-    console.log("streamToken", streamToken);
+    console.log("streamToken", streamToken.toString());
     res.json({
       accessToken: accessToken,
-      streamToken: streamToken,
+      streamToken: streamToken.toString(),
     });
   });
 };
@@ -137,7 +137,7 @@ exports.googleLogin = async (req, res) => {
     const streamToken = return_stream_token(email);
     res
       .status(200)
-      .json({ accessToken: accessToken, streamToken: streamToken.toString() });
+      .json({ accessToken: accessToken, streamToken: streamToken });
   }
 
   //Create token
