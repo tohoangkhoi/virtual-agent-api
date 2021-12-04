@@ -1,6 +1,6 @@
 const { Users } = require("../models");
 const bcrypt = require("bcrypt");
-const connect = require("getstream");
+const { connect } = require("getstream");
 const nodemailer = require("nodemailer");
 const { sign } = require("jsonwebtoken");
 const { validationResult } = require("express-validator");
