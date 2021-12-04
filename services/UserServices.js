@@ -193,6 +193,7 @@ exports.verify_email = async (req, res) => {
       resData = data;
     })
     .catch((err) => {
+      console.log(err);
       res.status(500).json(err);
     });
 
