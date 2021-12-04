@@ -35,7 +35,10 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false,
     },
-
+    chat_id: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
     is_verified: {
       type: DataTypes.BOOLEAN,
       allowNull: false,
