@@ -180,6 +180,7 @@ exports.verify_email = async (req, res) => {
     first_name: user.first_name,
     last_name: user.last_name,
     secret: user.email,
+    custom_json: { high_score: 2000 },
   };
 
   const { id } = await axios
