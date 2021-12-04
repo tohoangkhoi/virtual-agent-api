@@ -189,8 +189,8 @@ exports.verify_email = async (req, res) => {
         "private-key": CHAT_ENGINE_PROJECT_SECRET,
       },
     })
-    .then((data) => {
-      console.log("chatEngine", data);
+    .then((response) => {
+      console.log("chatEngine", response);
     })
     .catch((err) => {
       console.log(err);
