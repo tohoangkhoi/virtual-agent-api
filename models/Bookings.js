@@ -18,6 +18,10 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false,
     },
+    prefered_university: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
     academic_level: {
       type: DataTypes.STRING,
       allowNull: false,

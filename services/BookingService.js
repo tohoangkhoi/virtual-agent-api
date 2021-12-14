@@ -10,9 +10,8 @@ exports.book = async (req, res) => {
       email: email,
     },
   }).catch((err) => {
-    res
-      .status(500)
-      .json(`There is something wrong while findign finding: ${email}`);
+    res.status(500).json(`There is something wrong while finding: ${email}`);
+    console.log("Error in finding user:", err);
   });
 
   if (!user) {
