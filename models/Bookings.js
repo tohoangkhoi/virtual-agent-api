@@ -18,6 +18,22 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.STRING,
       allowNull: false,
     },
+    academic_level: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    gpa: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+    english_level: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
+    englist_result: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
   });
 
   Bookings.associate = (models) => {
