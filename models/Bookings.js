@@ -36,7 +36,7 @@ module.exports = (sequelize, DataTypes) => {
     },
     englist_result: {
       type: DataTypes.STRING,
-      allowNull: false,
+      allowNull: true,
     },
   });
 
