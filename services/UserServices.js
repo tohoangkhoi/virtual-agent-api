@@ -169,7 +169,12 @@ exports.googleLogin = async (req, res) => {
 };
 
 exports.verify_email = async (req, res) => {
-  const user = await Users.findOne({ where: { email: req.params.id } });
+  const user = await Users.findOne({ where: { email: req.params.id } }).catch(
+    (err) => {
+      res.json(err);
+      console.log("error in finding user:", err);
+    }
+  );
   if (!user) {
     res.json("User does not exist");
   }
