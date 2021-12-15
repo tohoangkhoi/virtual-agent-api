@@ -1,17 +1,17 @@
 
 {
   "development": {
-    "username": "root",
-    "password": "Kingsbury22",
-    "database": "virtual-agent",
-    "host": "127.0.0.1",
+   "username": "ba3d2e7e9cff97",
+    "password": "348ed759",
+    "database": "heroku_d8b512d37bc4856",
+    "host": "us-cdbr-east-04.cleardb.com",
     "dialect": "mysql"
   },
   "test": {
-    "username": "root",
-    "password": null,
-    "database": "database_test",
-    "host": "127.0.0.1",
+    "username": "ba3d2e7e9cff97",
+    "password": "348ed759",
+    "database": "heroku_d8b512d37bc4856",
+    "host": "us-cdbr-east-04.cleardb.com",
     "dialect": "mysql"
   },
   "production": {

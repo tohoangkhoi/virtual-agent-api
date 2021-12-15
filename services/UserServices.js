@@ -193,15 +193,15 @@ exports.verify_email = async (req, res) => {
     secret: user.email,
   };
 
-  await axios
-    .post("https://api.chatengine.io/users/", chatPayload, {
-      headers: {
-        "private-key": CHAT_ENGINE_PROJECT_SECRET,
-      },
-    })
-    .catch((err) => {
-      res.status(500).json(err);
-    });
+  // await axios
+  //   .post("https://api.chatengine.io/users/", chatPayload, {
+  //     headers: {
+  //       "private-key": CHAT_ENGINE_PROJECT_SECRET,
+  //     },
+  //   })
+  //   .catch((err) => {
+  //     res.status(500).json(err);
+  //   });
 
   res.json("Successfull");
 };
