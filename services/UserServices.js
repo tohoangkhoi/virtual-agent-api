@@ -92,7 +92,7 @@ exports.login = async (req, res) => {
     res.status(404).send({ param: "email", msg: "Email doesnt match." });
   }
 
-  if (!user.is_verified) {
+  if (user.is_verified == false) {
     res
       .status(404)
       .send({ param: "email", msg: "You have not activate your account." });
