@@ -203,7 +203,7 @@ exports.verify_email = async (req, res) => {
   //     res.status(500).json(err);
   //   });
 
-  res.json("Successfull");
+  res.redirect("http://virtual-agent.s3-website-ap-southeast-2.amazonaws.com/");
 };
 
 const send_activation_link = (to) => {
