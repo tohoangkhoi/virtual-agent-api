@@ -1,24 +1,24 @@
 
 {
   "development": {
-   "username": "ba3d2e7e9cff97",
-    "password": "348ed759",
-    "database": "heroku_d8b512d37bc4856",
-    "host": "us-cdbr-east-04.cleardb.com",
+   "username": "admin",
+    "password": "Kingsbury22",
+    "database": "VADB",
+    "host": "va-db.cgxkbs0qruym.ap-southeast-2.rds.amazonaws.com",
     "dialect": "mysql"
   },
   "test": {
-    "username": "ba3d2e7e9cff97",
-    "password": "348ed759",
-    "database": "heroku_d8b512d37bc4856",
-    "host": "us-cdbr-east-04.cleardb.com",
+     "username": "admin",
+    "password": "Kingsbury22",
+    "database": "VADB",
+    "host": "va-db.cgxkbs0qruym.ap-southeast-2.rds.amazonaws.com",
     "dialect": "mysql"
   },
   "production": {
-    "username": "ba3d2e7e9cff97",
-    "password": "348ed759",
-    "database": "heroku_d8b512d37bc4856",
-    "host": "us-cdbr-east-04.cleardb.com",
+    "username": "admin",
+    "password": "Kingsbury22",
+    "database": "VADB",
+    "host": "va-db.cgxkbs0qruym.ap-southeast-2.rds.amazonaws.com",
     "dialect": "mysql"
   }
 }
