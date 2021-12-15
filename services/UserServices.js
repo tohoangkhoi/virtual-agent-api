@@ -195,7 +195,9 @@ exports.verify_email = async (req, res) => {
   const responseUser = await Users.update(
     { is_verified: true, chat_id: "null" },
     { where: { email: req.params.id } }
-  );
+  ).catch((err) => {
+    console.log("error in updating user:", err);
+  });
 
   res.json("Successfull");
 };
