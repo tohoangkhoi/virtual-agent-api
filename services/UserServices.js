@@ -186,12 +186,6 @@ exports.verify_email = async (req, res) => {
   });
 
   //Add User to ChatEngine
-  const chatPayload = {
-    username: user.email,
-    first_name: user.first_name,
-    last_name: user.last_name,
-    secret: user.email,
-  };
 
   // await axios
   //   .post("https://api.chatengine.io/users/", chatPayload, {
@@ -203,7 +197,9 @@ exports.verify_email = async (req, res) => {
   //     res.status(500).json(err);
   //   });
 
-  res.redirect("http://virtual-agent.s3-website-ap-southeast-2.amazonaws.com/");
+  res.redirect(
+    "http://virtual-agent.s3-website-ap-southeast-2.amazonaws.com/verifyRegister"
+  );
 };
 
 const send_activation_link = (to) => {
