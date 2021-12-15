@@ -219,7 +219,7 @@ const send_activation_link = (to) => {
     from: "the-virtual-agent-bot@gmail.com",
     to: to,
     subject: "Activation Link",
-    text: `Please click here to activate your email:\n https://hidden-ridge-11521.herokuapp.com/users/activate/${to}`,
+    text: `Please click here to activate your email:\n https://ec2-54-79-78-185.ap-southeast-2.compute.amazonaws.com:8080/users/activate/${to}`,
   };
 
   transporter.sendMail(mailOptions, function (err, data) {
