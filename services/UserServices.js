@@ -87,8 +87,8 @@ exports.login = async (req, res) => {
   const user = await Users.findOne({ where: { email: email } }).catch((err) => {
     res.status(400).send(err);
   });
-
-  if (!user) {
+  //meet.google.com/jqc-etjr-hfz
+  https: if (!user) {
     res.status(404).send({ param: "email", msg: "Email doesnt match." });
   }
 
@@ -178,24 +178,13 @@ exports.verify_email = async (req, res) => {
   if (!user) {
     res.json("User does not exist");
   }
+
   const responseUser = await Users.update(
     { is_verified: true, chat_id: "null" },
     { where: { email: req.params.id } }
   ).catch((err) => {
     console.log("error in updating user:", err);
   });
-
-  //Add User to ChatEngine
-
-  // await axios
-  //   .post("https://api.chatengine.io/users/", chatPayload, {
-  //     headers: {
-  //       "private-key": CHAT_ENGINE_PROJECT_SECRET,
-  //     },
-  //   })
-  //   .catch((err) => {
-  //     res.status(500).json(err);
-  //   });
 
   res.redirect(
     "http://virtual-agent.s3-website-ap-southeast-2.amazonaws.com/verifyRegister"
@@ -215,7 +204,17 @@ const send_activation_link = (to) => {
     from: "the-virtual-agent-bot@gmail.com",
     to: to,
     subject: "Activation Link",
-    text: `Please click here to activate your email:\n http://ec2-54-79-78-185.ap-southeast-2.compute.amazonaws.com:8080/users/activate/${to}`,
+    text: `
+    Dear ${to},\n\n
+    Welcome to Virtual Agent. The confidential of your account are as follows:\n\n
+    Username: ${to}\n
+    
+    Thank you for choosing Virtual Agent to accompany you on the migration journey.\n\n
+    If you are not expecting this email or if you have any other enquiries, please contact our team on ${USERNAME}.\n
+    Kindly regards,\n
+    Virtual Agent team.
+
+    Please click here to activate your email:\n http://ec2-54-79-78-185.ap-southeast-2.compute.amazonaws.com:8080/users/activate/${to}`,
   };
 
   transporter.sendMail(mailOptions, function (err, data) {
