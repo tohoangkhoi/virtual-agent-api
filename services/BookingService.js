@@ -44,7 +44,7 @@ const send_booking_detail_to_mail = (to, booking) => {
     text: `Dear ${to}\n \n 
     This is the confirmation email of the booking appointment on Virtual Agent. The details of your booking are as follows:\n\n
     Booking number: ${booking.id}
-    Agent: ${chloe_le}\n
+    Agent: chloe_le\n
     Time: ${booking.createdAt}\n
     Please note: This booking status is PENDING.\n\n
     When the booking is in review process, the updating status will be sent in a separate email.\n
