@@ -52,7 +52,7 @@ const send_booking_detail_to_mail = (to, booking) => {
     \t1. Login by a valid account.\n
     \t2. Click the "Contact agent" button at homepage.\n
     \t3. Find the "+" at the "My Chats" (on the top left of your screen) to create your private chat room.\n
-    \t4. Locate to "People", at "Type a username", intput our agent name to add him/her to the chat room.\n \n
+    \t4. Locate to "People", at "Type a username", intput our agent name to add him/her to the chat room.\n\n
     
     If you are not expecting this email or if you have any other enquiries, please contact our team on {OurEmail}.\n
     Kindly regards,\n
