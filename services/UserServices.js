@@ -54,6 +54,7 @@ exports.register = async (req, res) => {
           send_activation_link(email);
           res.status(200).json("Success");
         } catch (err) {
+          console.log(err);
           res.status(500).json({ message: err });
         }
       })
