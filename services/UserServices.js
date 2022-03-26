@@ -20,7 +20,6 @@ exports.register = async (req, res) => {
     home_country,
     address,
   } = req.body;
-  console.log("email", email);
 
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
@@ -50,27 +49,24 @@ exports.register = async (req, res) => {
       is_subscribed: false,
       update_profile: false,
     })
-      .then(() => {
+      .then((res) => {
         try {
           send_activation_link(email);
           res.status(200).json("Success");
         } catch (err) {
-          console.log(err);
           res.status(500).json({ message: err });
         }
       })
       .catch((exception) => {
-        res.status(400).json(
-          exception.errors.map((err) => {
-            if (err.message === "email must be unique") {
-              res
-                .status(400)
-                .send([{ param: "email", msg: "Email is already taken." }]);
-            } else {
-              res.status(400).json([{ name: err.path, message: err.message }]);
-            }
-          })
-        );
+        exception.errors.map((err) => {
+          if (err.message === "email must be unique") {
+            res
+              .status(400)
+              .send([{ param: "email", msg: "Email is already taken." }]);
+          } else {
+            res.status(400).json([{ name: err.path, message: err.message }]);
+          }
+        });
       });
   });
 };
@@ -209,7 +205,7 @@ const send_activation_link = (to) => {
     Kindly regards,\n
     Virtual Agent team.
 
-    Please click here to activate your email:\n http://localhost:8080/users/activate/${to}`,
+    Please click here to activate your email:\n http://54.252.135.207:8080/users/activate/${to}`,
   };
 
   transporter.sendMail(mailOptions, function (err, data) {
