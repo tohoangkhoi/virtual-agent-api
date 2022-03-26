@@ -1,24 +1,23 @@
-
 {
   "development": {
-   "username": "admin",
+    "username": "admin",
     "password": "Kingsbury22",
-    "database": "VADB",
-    "host": "va-db.cgxkbs0qruym.ap-southeast-2.rds.amazonaws.com",
+    "database": "new_schema",
+    "host": "vadb.cxatogwo2mxx.ap-southeast-2.rds.amazonaws.com",
     "dialect": "mysql"
   },
   "test": {
-     "username": "admin",
+    "username": "admin",
     "password": "Kingsbury22",
     "database": "VADB",
-    "host": "va-db.cgxkbs0qruym.ap-southeast-2.rds.amazonaws.com",
+    "host": "vadb.cxatogwo2mxx.ap-southeast-2.rds.amazonaws.com",
     "dialect": "mysql"
   },
   "production": {
     "username": "admin",
     "password": "Kingsbury22",
-    "database": "VADB",
-    "host": "va-db.cgxkbs0qruym.ap-southeast-2.rds.amazonaws.com",
+    "database": "new_schema",
+    "host": "vadb.cxatogwo2mxx.ap-southeast-2.rds.amazonaws.com",
     "dialect": "mysql"
   }
 }

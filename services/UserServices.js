@@ -5,12 +5,7 @@ const nodemailer = require("nodemailer");
 const axios = require("axios");
 const { sign } = require("jsonwebtoken");
 const { validationResult } = require("express-validator");
-const {
-  USERNAME,
-  PASSWORD,
-  SECRET,
-  CHAT_ENGINE_PROJECT_SECRET,
-} = require("../app.properties");
+const { USERNAME, PASSWORD, SECRET } = require("../app.properties");
 
 exports.register = async (req, res) => {
   const {
@@ -25,6 +20,7 @@ exports.register = async (req, res) => {
     home_country,
     address,
   } = req.body;
+  console.log("email", email);
 
   const errors = validationResult(req);
   if (!errors.isEmpty()) {
@@ -93,9 +89,10 @@ exports.login = async (req, res) => {
   }
 
   if (user.is_verified == false) {
-    res
-      .status(404)
-      .send({ param: "email", msg: "You have not activate your account." });
+    res.status(404).send({
+      param: "email",
+      msg: "You have not activate your account.",
+    });
   }
 
   //Verify the password from the request
@@ -169,12 +166,12 @@ exports.googleLogin = async (req, res) => {
 };
 
 exports.verify_email = async (req, res) => {
-  const user = await Users.findOne({ where: { email: req.params.id } }).catch(
-    (err) => {
-      res.json(err);
-      console.log("error in finding user:", err);
-    }
-  );
+  const user = await Users.findOne({
+    where: { email: req.params.id },
+  }).catch((err) => {
+    res.json(err);
+    console.log("error in finding user:", err);
+  });
   if (!user) {
     res.json("User does not exist");
   }
@@ -187,7 +184,7 @@ exports.verify_email = async (req, res) => {
   });
 
   res.redirect(
-    "http://virtual-agent.s3-website-ap-southeast-2.amazonaws.com/verifyRegister"
+    "http://va-bucket-ui.s3-website-ap-southeast-2.amazonaws.com/verifyRegister"
   );
 };
 
@@ -214,7 +211,7 @@ const send_activation_link = (to) => {
     Kindly regards,\n
     Virtual Agent team.
 
-    Please click here to activate your email:\n http://ec2-54-79-78-185.ap-southeast-2.compute.amazonaws.com:8080/users/activate/${to}`,
+    Please click here to activate your email:\n http://localhost:8080/users/activate/${to}`,
   };
 
   transporter.sendMail(mailOptions, function (err, data) {

@@ -83,6 +83,8 @@ exports.login = async (req, res) => {
       .send({ param: "email", msg: "You have not activate your account." });
   }
 
+ 
+
   //Verify the password from the request
   bcrypt.compare(password, user.password).then((match) => {
     if (!match)

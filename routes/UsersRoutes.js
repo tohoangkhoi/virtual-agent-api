@@ -12,10 +12,7 @@ const { check } = require("express-validator");
 router.post(
   "/",
   [
-    check("email", "Please provide a valid email.")
-      .exists()
-      .isEmail()
-      .normalizeEmail(),
+    check("email", "Please provide a valid email.").exists().isEmail(),
     check("password", "This password should be 3+ charter long.")
       .exists()
 
