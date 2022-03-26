@@ -51,8 +51,6 @@ exports.register = async (req, res) => {
       update_profile: false,
     })
       .then(() => {
-        send_activation_link(email);
-
         try {
           send_activation_link(email);
           res.status(200).json("Success");
