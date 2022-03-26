@@ -49,9 +49,10 @@ exports.register = async (req, res) => {
       is_subscribed: false,
       update_profile: false,
     })
-      .then((res) => {
+      .then(() => {
         try {
           send_activation_link(email);
+
           res.status(200).json("Success");
         } catch (err) {
           console.log(err);
