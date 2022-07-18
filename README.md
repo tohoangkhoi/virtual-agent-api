@@ -2,10 +2,10 @@
 Connect to the database:
 - Install MySQL Workbench or any similar tools.
 - Create a new db connection with these credentials: 
-    "username": "admin",
-    "password": "Kingsbury22",
-    "database": "VADB",
-    "host": "vadb.cxatogwo2mxx.ap-southeast-2.rds.amazonaws.com",
+    + "username": "admin",
+    + "password": "Kingsbury22",
+    + "database": "VADB",
+    + "host": "vadb.cxatogwo2mxx.ap-southeast-2.rds.amazonaws.com",
 
 ![image](https://user-images.githubusercontent.com/95118667/179451614-eadf275e-5220-43af-9716-7f564f1d9113.png)
 
