@@ -1,8 +1,8 @@
 {
   "development": {
-    "username": "admin",
-    "password": "Kingsbury22",
-    "database": "new_schema",
+    "username": "YOUR_USERNAME",
+    "password": "YOUR_PASSWORD",
+    "database": "YOUR_SCHEMA_NAME",
     "host": "vadb.cxatogwo2mxx.ap-southeast-2.rds.amazonaws.com",
     "dialect": "mysql"
   },
